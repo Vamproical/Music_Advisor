@@ -1,23 +1,25 @@
 package advisor;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        boolean isAuth = false;
         String input = "";
+        String accessToken = "";
         while (!input.equals("exit")) {
             input = scanner.nextLine();
             switch (input) {
                 case "auth":
-                    System.out.println("https://accounts.spotify.com/authorize?client_id=c915d91261d3470a8a920b25c8687a04redirect_uri=http://localhost:8080&response_type=code");
-                    System.out.println();
+                    OAuth oAuth = new OAuth();
+                    accessToken = oAuth.getAccessToken();
+                    System.out.println("response:");
+                    System.out.println(accessToken);
                     System.out.println("---SUCCESS---\n");
-                    isAuth = true;
                     break;
                 case "new":
-                    if (!isAuth) {
+                    if (accessToken.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else {
                         System.out.println("---NEW RELEASES---\n" +
@@ -35,7 +37,7 @@ public class Main {
                             "Latin\n");
                     break;
                 case "featured":
-                    if (!isAuth) {
+                    if (accessToken.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else {
                         System.out.println("---FEATURED---\n" + "Mellow Morning\n" +
