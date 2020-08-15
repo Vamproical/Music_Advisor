@@ -1,11 +1,13 @@
 package advisor;
 
-import java.io.IOException;
-
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        if (args.length > 1 && args[0].equals("-access")) {
-            Utils.SERVER_PATH = args[1];
+    public static void main(String[] args) throws Exception {
+        for (int i = 0; i < args.length - 1; i++) {
+            if (args[i].equals("-access")) {
+                Utils.SERVER_PATH = args[i + 1];
+            } else if (args[i].equals("-resource")) {
+                Utils.API_PATH = args[i + 1];
+            }
         }
         MusicAdviser advisor = new MusicAdviser();
         advisor.advise();
