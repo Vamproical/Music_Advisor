@@ -7,13 +7,14 @@ public class MusicAdviser {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         OAuth oAuth = new OAuth();
+        Authorization authorization = Authorization.getInstance();
         while (!input.equals("exit")) {
             input = scanner.nextLine();
             switch (input) {
                 case "auth":
-                    oAuth.getConnection();
-                    oAuth.getAccessToken();
-                    System.out.println("Success!");
+                    authorization.getConnection();
+                    authorization.getAccessToken();
+                    System.out.println("---SUCCESS---");
                     break;
                 case "new":
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
@@ -42,7 +43,7 @@ public class MusicAdviser {
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else if (input.startsWith("playlists")) {
-                        oAuth.getCategories(input.substring(10));
+                        oAuth.getPlaylist(input.substring(10));
                     }
                     break;
             }

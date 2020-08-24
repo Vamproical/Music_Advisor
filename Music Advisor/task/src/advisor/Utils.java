@@ -10,4 +10,5 @@ public class Utils {
 
     public static String ACCESS_TOKEN = "";
     public static String AUTH_CODE = "";
+    public static int PAGE = 5;
 }
