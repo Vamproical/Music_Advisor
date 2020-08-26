@@ -19,10 +19,7 @@ public class OAuth {
             List<String> artists = new ArrayList<>();
             album.get("artists").getAsJsonArray().forEach(artist -> {
                 artists.add(artist.getAsJsonObject().get("name").getAsString());
-                newList.add(name + "\n");
-                newList.add(artists.toString() + "\n");
-                newList.add(url + "\n");
-                newList.add("\n");
+                newList.add(name + "\n" + artists.toString() + "\n" + url + "\n" + "\n");
             });
         });
         return newList;
@@ -36,9 +33,7 @@ public class OAuth {
             JsonObject album = item.getAsJsonObject();
             String name = album.get("name").getAsString();
             String url = album.get("external_urls").getAsJsonObject().get("spotify").getAsString();
-            featuredList.add(name + "\n");
-            featuredList.add(url + "\n");
-            featuredList.add("\n");
+            featuredList.add(name + "\n" + url + "\n" + "\n");
         });
         return featuredList;
     }
@@ -67,9 +62,7 @@ public class OAuth {
             JsonObject category = item.getAsJsonObject();
             String url = category.get("external_urls").getAsJsonObject().get("spotify").getAsString();
             String name = category.get("name").getAsString();
-            playlistList.add(name + "\n");
-            playlistList.add(url + "\n");
-            playlistList.add("\n");
+            playlistList.add(name + "\n" + url + "\n" + "\n");
         });
         return playlistList;
     }

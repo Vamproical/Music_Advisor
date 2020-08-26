@@ -44,7 +44,9 @@ public class SpotifyRequests {
 
     public static String getCategoryIdByCategoryName(String categoryName) throws IOException, InterruptedException {
         String categories = getRequestedData(categoriesRequest);
-        JsonArray items = JsonParser.parseString(categories).getAsJsonObject().get("categories").getAsJsonObject().get("items").getAsJsonArray();
+        JsonArray items = JsonParser.parseString(categories).getAsJsonObject()
+                .get("categories").getAsJsonObject()
+                .get("items").getAsJsonArray();
         for (JsonElement item : items) {
             String name = item.getAsJsonObject().get("name").getAsString();
             if (categoryName.equals(name)) {
@@ -59,7 +61,7 @@ public class SpotifyRequests {
         if (categoryID == null) {
             return null;
         }
-        String playlistsURL = Utils.API_PATH + "v1/browse/categories/" + categoryID + "/playlists";
-        return JsonParser.parseString(getRequestedData(playlistsURL)).getAsJsonObject();
+        String playlistsURL = Utils.API_PATH + "/v1/browse/categories/" + categoryID + "/playlists";
+        return JsonParser.parseString(getRequestedData(playlistsURL)).getAsJsonObject().get("playlists").getAsJsonObject();
     }
 }

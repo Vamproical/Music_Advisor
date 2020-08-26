@@ -1,5 +1,6 @@
 package advisor;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MusicAdviser {
@@ -20,30 +21,43 @@ public class MusicAdviser {
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else {
-                        oAuth.getNew();
+                        List<String> newList = oAuth.getNew();
+                        View.print(newList);
                     }
                     break;
                 case "categories":
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else {
-                        oAuth.getCategories();
+                        List<String> categoriesList = oAuth.getCategories();
+                        View.print(categoriesList);
                     }
                     break;
                 case "featured":
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else {
-                        oAuth.getFeatured();
+                        List<String> featuredList = oAuth.getFeatured();
+                        View.print(featuredList);
                     }
                     break;
+                case "next":
+                    View.printNextPage();
+                    break;
+                case "prev":
+                    View.printPrevPage();
+                    break;
                 case "exit":
+                    System.out.println("---GOODBYE---");
                     break;
                 default:
                     if (Utils.ACCESS_TOKEN.isEmpty()) {
                         System.out.println("Please, provide access for application.");
                     } else if (input.startsWith("playlists")) {
-                        oAuth.getPlaylist(input.substring(10));
+                        List<String> playlistList = oAuth.getPlaylist(input.substring(10));
+                        if (playlistList != null) {
+                            View.print(playlistList);
+                        }
                     }
                     break;
             }
